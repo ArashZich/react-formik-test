@@ -6,6 +6,8 @@ const initialValues = {
   name: "Arash",
   email: "",
   channel: "",
+  comments: "",
+  address: "",
 };
 const onSubmit = (values) => {
   console.log("Form data", values);
@@ -38,8 +40,37 @@ function YoutubeForm() {
 
         <div className="form-control">
           <label htmlFor="channel">Channel</label>
-          <Field type="text" id="channel" name="channel" />
+          <Field
+            type="text"
+            id="channel"
+            name="channel"
+            placeholder="Youtube channel name"
+          />
           <ErrorMessage name="channel" />
+        </div>
+
+        <div className="form-control">
+          <label htmlFor="comments">Comments</label>
+          <Field as="textarea" id="comments" name="comments" />
+          <ErrorMessage name="comments" />
+        </div>
+
+        {/* create custom component with Field from Formik */}
+        <div className="form-control">
+          <label htmlFor="address">Address</label>
+          <Field name="address">
+            {(props) => {
+              const { field, form, meta } = props;
+              console.log("Render props", props, form);
+              return (
+                <div>
+                  <input type="text" id="address" {...field} />
+                  {meta.touched && meta.error ? <div>{meta.error}</div> : null}
+                </div>
+              );
+            }}
+          </Field>
+          <ErrorMessage name="address" />
         </div>
 
         <button type="submit">Submit</button>
