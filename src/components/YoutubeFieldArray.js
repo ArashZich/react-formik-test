@@ -1,5 +1,12 @@
 import React from "react";
-import { Formik, Form, Field, ErrorMessage, FieldArray } from "formik";
+import {
+  Formik,
+  Form,
+  Field,
+  ErrorMessage,
+  FieldArray,
+  FastField,
+} from "formik";
 import * as Yup from "yup";
 import TextError from "./TextError";
 
@@ -65,10 +72,12 @@ function YoutubeFieldArray() {
         </div>
 
         {/* create custom component with Field from Formik */}
+        {/* FastField optimize Field */}
         <div className="form-control">
           <label htmlFor="address">Address</label>
-          <Field name="address">
+          <FastField name="address">
             {(props) => {
+              console.log("Fast Field");
               const { field, meta } = props;
               return (
                 <div>
@@ -77,7 +86,7 @@ function YoutubeFieldArray() {
                 </div>
               );
             }}
-          </Field>
+          </FastField>
           <ErrorMessage name="address" />
         </div>
 
@@ -105,7 +114,7 @@ function YoutubeFieldArray() {
           <label>List of phone number</label>
           <FieldArray name="phNumbers">
             {(fieldArrayProps) => {
-              console.log("fieldArrayProps", fieldArrayProps);
+              //   console.log("fieldArrayProps", fieldArrayProps);
               const { push, remove, form } = fieldArrayProps;
               const { values } = form;
               const { phNumbers } = values;
