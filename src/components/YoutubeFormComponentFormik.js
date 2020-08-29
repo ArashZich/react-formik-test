@@ -9,6 +9,11 @@ const initialValues = {
   channel: "",
   comments: "",
   address: "",
+  social: {
+    facebook: "",
+    twitter: "",
+  },
+  phoneNumbers: ["", ""],
 };
 const onSubmit = (values) => {
   console.log("Form data", values);
@@ -63,8 +68,7 @@ function YoutubeForm() {
           <label htmlFor="address">Address</label>
           <Field name="address">
             {(props) => {
-              const { field, form, meta } = props;
-              console.log("Render props", props, form);
+              const { field, meta } = props;
               return (
                 <div>
                   <input type="text" id="address" {...field} />
@@ -74,6 +78,26 @@ function YoutubeForm() {
             }}
           </Field>
           <ErrorMessage name="address" />
+        </div>
+
+        <div className="form-control">
+          <label htmlFor="facebook">Facebook profile</label>
+          <Field type="text" id="facebook" name="social.facebook" />
+        </div>
+
+        <div className="form-control">
+          <label htmlFor="twitter">Twitter profile</label>
+          <Field type="text" id="twitter" name="social.twitter" />
+        </div>
+
+        <div className="form-control">
+          <label htmlFor="primaryPh">Primary phone number</label>
+          <Field type="text" id="primaryPh" name="phoneNumbers[0]" />
+        </div>
+
+        <div className="form-control">
+          <label htmlFor="secondaryPh">Secondary phone number</label>
+          <Field type="text" id="secondaryPh" name="phoneNumbers[1]" />
         </div>
 
         <button type="submit">Submit</button>
