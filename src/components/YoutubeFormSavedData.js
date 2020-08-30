@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Formik,
   Form,
@@ -16,6 +16,20 @@ const initialValues = {
   channel: "",
   comments: "",
   address: "",
+  social: {
+    facebook: "",
+    twitter: "",
+  },
+  phoneNumbers: ["", ""],
+  phNumbers: [""],
+};
+
+const savedValues = {
+  name: "Arash",
+  email: "zich@zich.com",
+  channel: "zich",
+  comments: "Welcome to Formik",
+  address: "7b Fardis Street",
   social: {
     facebook: "",
     twitter: "",
@@ -43,15 +57,15 @@ const validateComments = (value) => {
   return error;
 };
 
-function YoutubeFieldArray() {
+function YoutubeFormSavedData() {
+  const [formValues, setFormValues] = useState(null);
   return (
     <Formik
-      initialValues={initialValues}
+      initialValues={formValues || initialValues}
       validationSchema={validationSchema}
       onSubmit={onSubmit}
+      enableReinitialize
       //   validateOnMount
-      //   validateOnChange={false}
-      //   validateOnBlur={false}
     >
       {(formik) => {
         console.log("Formik props", formik);
@@ -165,34 +179,8 @@ function YoutubeFieldArray() {
               </FieldArray>
             </div>
 
-            <button
-              type="button"
-              onClick={() => formik.validateField("comments")}
-            >
-              Validate comments
-            </button>
-            <button type="button" onClick={() => formik.validateForm()}>
-              Validate all
-            </button>
-
-            <button
-              type="button"
-              onClick={() => formik.setFieldTouched("comments")}
-            >
-              Visit comments
-            </button>
-            <button
-              type="button"
-              onClick={() =>
-                formik.setTouched({
-                  name: true,
-                  email: true,
-                  channel: true,
-                  comments: true,
-                })
-              }
-            >
-              Visit fields
+            <button type="button" onClick={() => setFormValues(savedValues)}>
+              Load saved data
             </button>
 
             <button
@@ -208,4 +196,4 @@ function YoutubeFieldArray() {
   );
 }
 
-export default YoutubeFieldArray;
+export default YoutubeFormSavedData;
