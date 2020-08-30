@@ -1,12 +1,15 @@
 import React from "react";
 import "./App.css";
-import FormikContainer from "./components/screen/FormikContainer";
+import LoginForm from "./components/screen/LoginForm";
+import { theme, ThemeProvider } from "@chakra-ui/core";
 
 function App() {
   return (
-    <div className="App">
-      <FormikContainer />
-    </div>
+    <ThemeProvider theme={theme}>
+      <div className="App">
+        <LoginForm />
+      </div>
+    </ThemeProvider>
   );
 }
 
